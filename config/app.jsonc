@@ -27,14 +27,15 @@
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png",
-                "pin": "assets/textures/moon.jpg"
+                "pin": "assets/textures/pin2.jpeg",
+                "ball": "assets/textures/Bowl.jpeg"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
                 "monkey": "assets/models/monkey.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
-                "pin": "assets/models/uploads_files_1002159_Pin.obj"
+                "pin": "assets/models/10492_Bowling Pin_v1_max2011_iteration-2.obj"
             },
             "samplers":{
                 "default":{},
@@ -123,6 +124,21 @@
                     "texture": "moon",
                     "sampler": "default"
                 },
+                "ball":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "ball",
+                    "sampler": "default"
+                },
                 "pin":{
                     "type": "textured",
                     "shader": "textured",
@@ -142,14 +158,14 @@
         },
         "world":[
             {
-                "position": [0, 4, 28],
-                "rotation": [-30, 0, 0],
+                "position": [0, 1.8, 28],
+                "rotation": [0, 0, 0],
                 "components": [
                     {
                         "type": "Camera"
                     },
                     {
-                        "type": "Free Camera Controller"
+                        "type": "Game Movment"
                     },
                     {
                         "type": "Movement",
@@ -169,6 +185,24 @@
                                 "material": "metal"
                             }
                         ]
+                    },
+                    {
+                        "position": [0, -2, -5],
+                        "rotation": [0, 0, 0],
+                        "scale": [1, 1, 1],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "sphere",
+                                "material": "ball"
+                            },
+                            {
+                                "type": "Movement",
+                                "linearVelocity": [0, 0, 0],
+                                "linearVelocity2": [0, 0, 0],
+                                "angularVelocity": [-90, 0, 0]
+                            }
+                        ]
                     }
                 ]
             },
@@ -185,27 +219,171 @@
                 ]
             },
             {
-                "position": [0, 0, 22],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1, 1],
+                "position": [0, -0.5, -10],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "sphere",
-                        "material": "moon"
+                        "mesh": "pin",
+                        "material": "pin"
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [0, 0, -10],
-                        "linearVelocity2": [-2, 0, 0],
-                        "angularVelocity": [-90, 0, 0]
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
                     }
                 ]
-            },
+            }
+            ,
             {
-                "position": [0, 0, -22],
-                "rotation": [0, 0, 0],
-                "scale": [1, 1, 1],
+                "position": [-0.8, -0.5, -11.3],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [0.8, -0.5, -11.3],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [-1.6, -0.5, -12.6],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [0, -0.5, -12.6],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [1.6, -0.5, -12.6],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [-2.4, -0.5, -13.9],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [-0.8, -0.5, -13.9],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [0.8, -0.5, -13.9],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "pin",
+                        "material": "pin"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    }
+                ]
+            }
+            ,
+            {
+                "position": [2.4, -0.5, -13.9],
+                "rotation": [-90, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
                 "components": [
                     {
                         "type": "Mesh Renderer",
