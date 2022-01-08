@@ -129,8 +129,8 @@
                     "sampler": "default"
                 },
                 "ball":{
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "light",
                     "pipelineState": {
                         "faceCulling":{
                             "enabled": false
@@ -402,7 +402,7 @@
                 ]
             },
             {
-              "position": [ 0, 3, 24 ],
+              "position": [ 0, 3, 26 ],
               "rotation": [ 0, -1,0 ],
               "scale": [ 0.1, 0.1, 0.1 ],
               "components": [
