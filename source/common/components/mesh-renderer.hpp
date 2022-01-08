@@ -2,6 +2,7 @@
 
 #include "../ecs/component.hpp"
 #include "../mesh/mesh.hpp"
+#include"../common/components/light.hpp"
 #include "../material/material.hpp"
 #include "../asset-loader.hpp"
 

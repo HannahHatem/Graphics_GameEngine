@@ -17,6 +17,7 @@ namespace our {
     std::unordered_map<std::string, Sampler*> AssetLoader<Sampler>::assets;
     std::unordered_map<std::string, Mesh*> AssetLoader<Mesh>::assets;
     std::unordered_map<std::string, Material*> AssetLoader<Material>::assets;
+    std::unordered_map<std::string, LightComponent*> AssetLoader<LightComponent>::assets;
 
     // This will load all the shaders defined in "data"
     // data must be in the form:
@@ -102,6 +103,21 @@ namespace our {
         }
     };
 
+    void AssetLoader<LightComponent>::deserialize(const nlohmann::json &data)
+    {
+        printf("LightComponent deserialization not implemented yet\n");
+        if (data.is_object())
+        {
+            for (auto &[name, desc] : data.items())
+            {
+                std::string type = desc.value("type", "");
+                auto light = new LightComponent();
+                light->deserialize(desc);
+                assets[name] = light;
+            }
+        }
+    };
+
     void deserializeAllAssets(const nlohmann::json& assetData){
         if(!assetData.is_object()) return;
         if(assetData.contains("shaders"))
@@ -114,6 +130,8 @@ namespace our {
             AssetLoader<Mesh>::deserialize(assetData["meshes"]);
         if(assetData.contains("materials"))
             AssetLoader<Material>::deserialize(assetData["materials"]);
+        if (assetData.contains("lights"))
+            AssetLoader<LightComponent>::deserialize(assetData["lights"]);
     }
 
     void clearAllAssets(){
@@ -122,6 +140,7 @@ namespace our {
         AssetLoader<Sampler>::clear();
         AssetLoader<Mesh>::clear();
         AssetLoader<Material>::clear();
+        AssetLoader<LightComponent>::clear();
     }
 
 }
