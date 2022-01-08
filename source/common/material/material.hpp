@@ -1,6 +1,7 @@
 #pragma once
 
 #include "pipeline-state.hpp"
+#include"../components/light.hpp"
 #include "../texture/texture2d.hpp"
 #include "../texture/sampler.hpp"
 #include "../shader/shader.hpp"
@@ -47,10 +48,19 @@ namespace our {
     public:
         Texture2D* texture;
         Sampler* sampler;
-        float alphaThreshold;
+        float alphaThreshold; //if the alpha of the object is less than the alphathreshold it will be fully transparent
 
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
+    };
+
+    //Create lit material that inherits from Textured material
+    class LitMaterial : public TexturedMaterial {
+    public:
+        Texture2D *albedo, *specular, *roughness, *emission, *ao;
+        void setup() const override;
+        void deserialize(const nlohmann::json& data) override;
+        
     };
 
     // This function returns a new material instance based on the given type
@@ -59,6 +69,8 @@ namespace our {
             return new TintedMaterial();
         } else if(type == "textured"){
             return new TexturedMaterial();
+        } else if(type == "lit"){
+            return new LitMaterial();
         } else {
             return new Material();
         }

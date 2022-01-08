@@ -77,6 +77,8 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/GameMovments.hpp
         source/common/components/GameMovments.cpp
+        source/common/components/light.cpp
+        source/common/components/light.cpp
         
         source/common/components/movement.hpp
         source/common/components/movement.cpp
