@@ -207,6 +207,7 @@
                 ]
             },
             {
+                "name": "plane",
                 "position": [0, -1, 0],
                 "rotation": [-90, 0, 0],
                 "scale": [7, 50, 1],
