@@ -71,20 +71,18 @@ set(COMMON_SOURCES
 
         source/common/components/camera.hpp
         source/common/components/camera.cpp
+        source/common/components/light.hpp
+        source/common/components/light.cpp
         source/common/components/mesh-renderer.hpp
         source/common/components/mesh-renderer.cpp
         source/common/components/free-camera-controller.hpp
         source/common/components/free-camera-controller.cpp
-        source/common/components/GameMovments.hpp
-        source/common/components/GameMovments.cpp
-        
         source/common/components/movement.hpp
         source/common/components/movement.cpp
         source/common/components/component-deserializer.hpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/free-camera-controller.hpp
-        source/common/systems/GameMovments.hpp
         source/common/systems/movement.hpp
 )
 

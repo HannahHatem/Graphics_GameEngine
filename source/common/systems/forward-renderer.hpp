@@ -1,7 +1,9 @@
 #pragma once
 
 #include "../ecs/world.hpp"
+#include "../ecs/transform.hpp"
 #include "../components/camera.hpp"
+#include "../components/light.hpp"
 #include "../components/mesh-renderer.hpp"
 
 #include <glad/gl.h>
@@ -19,6 +21,7 @@ namespace our
         glm::vec3 center;
         Mesh* mesh;
         Material* material;
+        Transform transform;
     };
 
     // A forward renderer is a renderer that draw the object final color directly to the framebuffer
@@ -30,6 +33,7 @@ namespace our
         // We define them here (instead of being local to the "render" function) as an optimization to prevent reallocating them every frame
         std::vector<RenderCommand> opaqueCommands;
         std::vector<RenderCommand> transparentCommands;
+        std::vector<LightComponent *> lights;
     public:
         // This function should be called every frame to draw the given world
         // Both viewportStart and viewportSize are using to define the area on the screen where we will draw the scene
@@ -58,6 +62,10 @@ namespace our
                     // Otherwise, we add it to the opaque command list
                         opaqueCommands.push_back(command);
                     }
+                }
+                if (auto light = entity->getComponent<LightComponent>(); light)
+                {
+                    lights.push_back(light);
                 }
             }
 
@@ -99,6 +107,37 @@ namespace our
             {
                 opaqueCommands[i].material->setup();
                 opaqueCommands[i].material->shader->set("transform", VP * opaqueCommands[i].localToWorld);
+                if (dynamic_cast<LitMaterial *>(opaqueCommands[i].material))
+                {
+                    LitMaterial *litMaterial = dynamic_cast<LitMaterial *>(opaqueCommands[i].material);
+
+                    opaqueCommands[i].material->shader->set("VP", VP);
+                    opaqueCommands[i].material->shader->set("eye", M * glm::vec4(0,0,0,1));
+                    opaqueCommands[i].material->shader->set("M", opaqueCommands[i].localToWorld);
+                    opaqueCommands[i].material->shader->set("M_IT", glm::inverse(opaqueCommands[i].localToWorld));
+                    opaqueCommands[i].material->shader->set("light_count", (int)lights.size());
+                    for (int j = 0; j < lights.size(); j++)
+                    {
+                        std::string light_name = "lights[" + std::to_string(j) + "]";
+                        glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+                        switch (lights[i]->lightType)
+                        {
+                        case LightType::DIRECTIONAL:
+                            opaqueCommands[i].material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            break;
+                        case LightType::POINT:
+                            break;
+                        case LightType::SPOT:
+                            opaqueCommands[i].material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            opaqueCommands[i].material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                            break;
+                        }
+                        opaqueCommands[i].material->shader->set(light_name + ".position", lightPos);
+                        opaqueCommands[i].material->shader->set(light_name + ".color", lights[i]->color);
+                        opaqueCommands[i].material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
+                        opaqueCommands[i].material->shader->set(light_name + ".type", (int)lights[i]->lightType);
+                    }
+                }
                 opaqueCommands[i].mesh->draw();
             }
             for (int i = 0; i < transparentCommands.size(); i++)
