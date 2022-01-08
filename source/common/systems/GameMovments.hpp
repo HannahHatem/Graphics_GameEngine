@@ -56,8 +56,6 @@ namespace our
             // If there is no entity with both a CameraComponent and a FreeCameraControllerComponent, we can do nothing so we return
             if (!(camera && controller))
                 return;
-                
-            printf("i am here\n");
             // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
             Entity *entity = camera->getOwner();
 
