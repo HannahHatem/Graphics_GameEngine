@@ -6,6 +6,7 @@
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
+#include "GameMovments.hpp"
 
 namespace our {
 
@@ -25,6 +26,10 @@ namespace our {
         } else if (type == LightComponent::getID()) {
             printf("desrialize light\n");
             component = entity->addComponent<LightComponent>();
+        }
+        else if (type == GameMovments::getID())
+        {
+            component = entity->addComponent<GameMovments>();
         }
         if(component) component->deserialize(data);
     }

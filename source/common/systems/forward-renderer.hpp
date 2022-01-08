@@ -142,8 +142,19 @@ namespace our
                     command.material->shader->set("light_count", (int)lights.size());
                     for (int i = 0; i < lights.size(); i++)
                     {
+                        glm::vec3 lightPos;
                         std::string light_name = "lights[" + std::to_string(i) + "]";
-                        glm::vec3 lightPos = lights[i]->getOwner()->localTransform.position;
+                        if (lights[i]->getOwner()->parent)
+                        {
+                            lightPos = lights[i]->getOwner()->parent->localTransform.position;
+                        }
+                        else
+                        {
+                            lightPos = lights[i]->getOwner()->localTransform.position;
+                        }
+                        
+                        
+                        
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:
