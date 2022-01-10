@@ -1195,7 +1195,7 @@
             {
                 "position": [
                     0,
-                    25,
+                    0,
                     13
                 ],
                 "rotation": [
@@ -1212,9 +1212,9 @@
                     {
                         "type": "Light",
                         "color": [
-                            0,
-                            0,
-                            1
+                            0.2,
+                            0.2,
+                            0.2
                         ],
                         "attenuation": [
                             0.005,
@@ -1230,7 +1230,7 @@
                             15,
                             30
                         ],
-                        "lightType": "spot"
+                        "lightType": "Directional"
                     }
                 ]
             }
