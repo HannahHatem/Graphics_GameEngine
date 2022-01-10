@@ -52,13 +52,13 @@ namespace our
                     break;
             }
 
-             std::cout<<std::endl<<controller->downPinnes<<std::endl;
+             //std::cout<<std::endl<<controller->downPinnes<<std::endl;
 
             if(controller->tries == 2)
             {
                 if(controller->downPinnes == pinnescount)
                 {
-                    std::cout<<std::endl<<"I am here \n";
+                    //std::cout<<std::endl<<"I am here \n";
                     app->changeState("winnerWin");
                 }
                 else

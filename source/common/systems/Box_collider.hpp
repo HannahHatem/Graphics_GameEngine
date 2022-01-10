@@ -71,7 +71,7 @@ namespace our
 
                     if (disy <= (first->length + second->length) && disx <= (first->width + second->width) && disz <= (first->height + second->height))
                     {
-                        std::cout << "collision detected " << first->action << std::endl;
+                        //std::cout << "collision detected " << first->action << std::endl;
 
                         if (second->getOwner()->name == "pin" && first->getOwner()->name == "ball")
                         {
@@ -85,22 +85,7 @@ namespace our
                         }
                         if (first->action == 1)
                         {
-                            std::cout << first->getOwner()->name << std::endl;
-                            //first->getOwner()->deleteComponent<Box_collider>();
-                            //first->getOwner()->deleteComponent<MeshRendererComponent>();
                             world->markForRemoval(first->getOwner());
-                            //world->deleteMarkedEntities();
-                            //first->getOwner()->ignore = true;
-                        }
-                        if (second->action == 1)
-                        {
-                            //colliders.remove(second);
-                            std::cout << second->getOwner()->name << std::endl;
-                            //second->getOwner()->deleteComponent<Box_collider>();
-                            //second->getOwner()->deleteComponent<MeshRendererComponent>();
-                            //delete second->getOwner();
-                            //world->markForRemoval(second->getOwner());
-                            //world->deleteMarkedEntities();
                         }
                     }
                 }
