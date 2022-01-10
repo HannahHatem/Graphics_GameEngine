@@ -174,7 +174,6 @@ namespace our
                             command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
                             break;
                         case LightType::POINT:
-                        command.material->shader->set(light_name + ".direction", glm::normalize(command.center - lights[i]->getOwner()->localTransform.position));
                             break;
                         case LightType::SPOT:
                             command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
