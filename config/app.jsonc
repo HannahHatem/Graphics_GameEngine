@@ -1195,7 +1195,7 @@
             {
                 "position": [
                     0,
-                    25,
+                    0,
                     13
                 ],
                 "rotation": [
@@ -1227,10 +1227,10 @@
                             0
                         ],
                         "cone_angles": [
-                            15,
-                            30
+                            60,
+                            90
                         ],
-                        "lightType": "Spot"
+                        "lightType": "Point"
                     }
                 ]
             }
