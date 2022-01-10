@@ -1,6 +1,7 @@
 #include "free-camera-controller.hpp"
 #include "../ecs/entity.hpp"
 #include "../deserialize-utils.hpp"
+#include <iostream>
 
 namespace our {
     // Reads sensitivities & speedupFactor from the given json object

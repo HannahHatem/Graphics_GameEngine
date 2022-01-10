@@ -1,5 +1,6 @@
 {
     "start-scene": "main",
+    "score" : "none",
     "window":
     {
         "title":"Default Game Window",
@@ -9,6 +10,8 @@
         },
         "fullscreen": false
     },
+    "loserWin" : "loser",
+    "winnerWin" : "winner",
     "scene": {
         "assets":{
             "shaders":{
@@ -162,6 +165,7 @@
         },
         "world":[
             {
+                "name" : "Camera",
                 "position": [0, 1.8, 28],
                 "rotation": [0, 0, 0],
                 "components": [
@@ -169,7 +173,7 @@
                         "type": "Camera"
                     },
                     {
-                        "type": "Game Movment"
+                        "type": "Free Camera Controller"
                     },
                     {
                         "type": "Movement",
@@ -189,24 +193,35 @@
                                 "material": "metal"
                             }
                         ]
+                    }
+                ]
+            },
+            {
+                "name" : "ball",
+                "position": [0, -0.2, 23],
+                "rotation": [0, 0, 0],
+                "scale": [1, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "ball"
                     },
                     {
-                        "position": [0, -2, -5],
-                        "rotation": [0, 0, 0],
-                        "scale": [1, 1, 1],
-                        "components": [
-                            {
-                                "type": "Mesh Renderer",
-                                "mesh": "sphere",
-                                "material": "ball"
-                            },
-                            {
-                                "type": "Movement",
-                                "linearVelocity": [0, 0, 0],
-                                "linearVelocity2": [0, 0, 0],
-                                "angularVelocity": [-90, 0, 0]
-                            }
-                        ]
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0],
+                        "linearVelocity2": [0, 0, 0],
+                        "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type" : "Game Movment"
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 2,
+                        "width" : 2,
+                        "height" : 2,
+                        "action" : 0
                     },
                     {
                         "position": [ 0, -2, -4 ],
@@ -250,6 +265,7 @@
                 ]
             },
             {
+                "name" : "pin",
                 "position": [0, -0.5, -10],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -263,11 +279,18 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
-            }
-            ,
+            },
             {
+                "name" : "pin",
                 "position": [-0.8, -0.5, -11.3],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -281,11 +304,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [0.8, -0.5, -11.3],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -299,11 +330,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [-1.6, -0.5, -12.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -317,11 +356,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [0, -0.5, -12.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -335,11 +382,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [1.6, -0.5, -12.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -353,11 +408,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [-2.4, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -371,11 +434,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [-0.8, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -389,11 +460,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [0.8, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -407,11 +486,19 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
                     }
                 ]
             }
             ,
             {
+                "name" : "pin",
                 "position": [2.4, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -425,6 +512,57 @@
                         "type": "Movement",
                         "linearVelocity": [0, 0, 0],
                         "angularVelocity": [0, 0, 0]
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 0,
+                        "width" : 0,
+                        "height" : 0,
+                        "action" : 1
+                    }
+                ]
+            },
+            {
+                "position": [8, 0, 0],
+                "rotation": [0, 0, 0],
+                "scale": [1, 1, 50],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "metal"
+                    }
+                ]
+            },
+            {
+                "position": [-8, 0, 0],
+                "rotation": [0, 0, 0],
+                "scale": [1, 1, 50],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "metal"
+                    }
+                ]
+            },
+            {
+                "name": "bound",
+                "position": [0, 0, -50],
+                "rotation": [0, 0, 0],
+                "scale": [9, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "metal"
+                    },
+                    {
+                        "type": "Collider",
+                        "length" : 1,
+                        "width" : 9,
+                        "height" : 1,
+                        "action" : 0
                     }
                 ]
             },

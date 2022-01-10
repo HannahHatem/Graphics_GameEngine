@@ -77,6 +77,8 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/GameMovments.hpp
         source/common/components/GameMovments.cpp
+        source/common/components/Box_collider.hpp
+        source/common/components/Box_collider.cpp
         source/common/components/light.cpp
         source/common/components/light.cpp
         
@@ -88,6 +90,7 @@ set(COMMON_SOURCES
         source/common/systems/free-camera-controller.hpp
         source/common/systems/GameMovments.hpp
         source/common/systems/movement.hpp
+        source/common/systems/Box_collider.hpp
 )
 
 # Define the directories in which to search for the included headers
@@ -106,6 +109,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bin)
 
 set(STATES_SOURCES
+        source/states/menu-state.hpp
+        source/states/lose-state.hpp
+        source/states/win-state.hpp
         source/states/play-state.hpp
         source/states/mesh-test-state.hpp
         source/states/transform-test-state.hpp

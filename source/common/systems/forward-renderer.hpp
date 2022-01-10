@@ -46,16 +46,19 @@ namespace our
         void render(World *world, glm::ivec2 viewportStart, glm::ivec2 viewportSize)
         {
             // First of all, we search for a camera and for all the mesh renderers
-            CameraComponent *camera = nullptr;
+            world->deleteMarkedEntities();
+            CameraComponent* camera = nullptr;
             opaqueCommands.clear();
             transparentCommands.clear();
             lights.clear();
             for (auto entity : world->getEntities())
             {
                 // If we hadn't found a camera yet, we look for a camera in this entity
-                // if camera then it is not null
-                if (!camera)
-                    camera = entity->getComponent<CameraComponent>();
+                if(entity->ignore == true)
+                {
+                    continue;
+                }
+                if(!camera) camera = entity->getComponent<CameraComponent>();
                 // If this entity has a mesh renderer component
                 if (auto meshRenderer = entity->getComponent<MeshRendererComponent>(); meshRenderer)
                 {

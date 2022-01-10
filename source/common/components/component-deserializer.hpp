@@ -7,6 +7,7 @@
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
 #include "GameMovments.hpp"
+#include "Box_collider.hpp"
 
 namespace our {
 
@@ -30,6 +31,8 @@ namespace our {
         else if (type == GameMovments::getID())
         {
             component = entity->addComponent<GameMovments>();
+        } else if (type == Box_collider::getID()){
+            component = entity->addComponent<Box_collider>();
         }
         if(component) component->deserialize(data);
     }
