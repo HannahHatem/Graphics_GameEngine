@@ -1214,12 +1214,12 @@
                         "color": [
                             0,
                             0,
-                            1
+                            0.4
                         ],
                         "attenuation": [
-                            0.005,
-                            0.005,
-                            0.005
+                            0.5,
+                            0.5,
+                            0.5
                         ],
                         "direction": [
                             0,
@@ -1230,7 +1230,7 @@
                             60,
                             90
                         ],
-                        "lightType": "Point"
+                        "lightType": "Directional"
                     }
                 ]
             }
