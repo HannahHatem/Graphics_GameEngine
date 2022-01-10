@@ -8,6 +8,7 @@
 #include <systems/movement.hpp>
 #include <systems/GameMovments.hpp>
 #include <asset-loader.hpp>
+#include <systems/Box_collider.hpp>
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
@@ -17,6 +18,7 @@ class Playstate: public our::State {
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
     our::BowlingMovment bowl_move;
+    our::collider Collider;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -32,6 +34,7 @@ class Playstate: public our::State {
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
         bowl_move.enter(getApp());
+        Collider.enter(getApp());
     }
 
     void onDraw(double deltaTime) override {
@@ -39,9 +42,12 @@ class Playstate: public our::State {
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         bowl_move.update(&world, (float)deltaTime);
+        Collider.update(&world, (float)deltaTime);
         // And finally we use the renderer system to draw the scene
         auto size = getApp()->getFrameBufferSize();
         renderer.render(&world, glm::ivec2(0, 0), size);
+
+        //world.deleteMarkedEntities();
     }
 
     void onDestroy() override {

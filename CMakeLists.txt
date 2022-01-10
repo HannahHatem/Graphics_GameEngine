@@ -77,6 +77,8 @@ set(COMMON_SOURCES
         source/common/components/free-camera-controller.cpp
         source/common/components/GameMovments.hpp
         source/common/components/GameMovments.cpp
+        source/common/components/Box_collider.hpp
+        source/common/components/Box_collider.cpp
         
         source/common/components/movement.hpp
         source/common/components/movement.cpp
@@ -86,6 +88,7 @@ set(COMMON_SOURCES
         source/common/systems/free-camera-controller.hpp
         source/common/systems/GameMovments.hpp
         source/common/systems/movement.hpp
+        source/common/systems/Box_collider.hpp
 )
 
 # Define the directories in which to search for the included headers
