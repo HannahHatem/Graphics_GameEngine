@@ -36,6 +36,7 @@ namespace our
         // We define them here (instead of being local to the "render" function) as an optimization to prevent reallocating them every frame
         std::vector<RenderCommand> opaqueCommands;
         std::vector<RenderCommand> transparentCommands;
+        //vector of lights in our scene
         std::vector<LightComponent *> lights;
 
     public:
@@ -50,6 +51,7 @@ namespace our
             CameraComponent* camera = nullptr;
             opaqueCommands.clear();
             transparentCommands.clear();
+            //clear light vector
             lights.clear();
             for (auto entity : world->getEntities())
             {
@@ -81,9 +83,10 @@ namespace our
                         opaqueCommands.push_back(command);
                     }
                 }
+                // If this entity has a light  component
                 if (auto light = entity->getComponent<LightComponent>(); light)
                 {
-                    lights.push_back(light);
+                    lights.push_back(light); //send it to light list
                 }
             }
 
@@ -132,21 +135,28 @@ namespace our
             // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
             for (auto command : opaqueCommands)
             {
+                //set up the material
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
+                //if it is a lit material
                 if (dynamic_cast<LitMaterial *>(command.material))
                 {
                     LitMaterial *litMaterial = dynamic_cast<LitMaterial *>(command.material);
 
+                    //set VP, eye, M, M_IT and light count in shader
                     command.material->shader->set("VP", VP);
                     command.material->shader->set("eye", eye);
                     command.material->shader->set("M", command.localToWorld);
                     command.material->shader->set("M_IT", glm::inverse(command.localToWorld));
                     command.material->shader->set("light_count", (int)lights.size());
+
+                    //for every light in the scene , send its data to shader according to its type
                     for (int i = 0; i < lights.size(); i++)
                     {
+
                         glm::vec3 lightPos;
                         std::string light_name = "lights[" + std::to_string(i) + "]";
+                        //if it is a child, send parent pos + relative pos of entity
                         if (lights[i]->getOwner()->parent)
                         {
                             lightPos = lights[i]->getOwner()->parent->localTransform.position + lights[i]->getOwner()->localTransform.position;
@@ -157,7 +167,7 @@ namespace our
                         }
                         
                         
-                        
+                        //for directional/Spot  send read directions
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:
@@ -182,21 +192,25 @@ namespace our
             }
             for (auto command : transparentCommands)
             {
+                 //set up the material
                 command.material->setup();
                 command.material->shader->set("transform", VP * command.localToWorld);
+                //if it is a lit material
                  if (dynamic_cast<LitMaterial *>(command.material))
                 {
                     LitMaterial *litMaterial = dynamic_cast<LitMaterial *>(command.material);
-
+                    //set VP, eye, M, M_IT and light count in shader
                     command.material->shader->set("VP", VP);
                     command.material->shader->set("eye", eye);
                     command.material->shader->set("M", command.localToWorld);
                     command.material->shader->set("M_IT", glm::inverse(command.localToWorld));
                     command.material->shader->set("light_count", (int)lights.size());
+                    //for every light in the scene , send its data to shader according to its type
                     for (int i = 0; i < lights.size(); i++)
                     {
                         glm::vec3 lightPos;
                         std::string light_name = "lights[" + std::to_string(i) + "]";
+                        //if it is a child, send parent pos + relative pos of entity
                         if (lights[i]->getOwner()->parent)
                         {
                             lightPos = lights[i]->getOwner()->parent->localTransform.position + lights[i]->getOwner()->localTransform.position;
@@ -207,7 +221,7 @@ namespace our
                         }
                         
                         
-                        
+                         //for directional/Spot  send read directions
                         switch (lights[i]->lightType)
                         {
                         case LightType::DIRECTIONAL:

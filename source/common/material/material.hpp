@@ -57,6 +57,7 @@ namespace our {
     //Create lit material that inherits from Textured material
     class LitMaterial : public TexturedMaterial {
     public:
+    // texture maps for material
         Texture2D *albedo, *specular, *roughness, *emission, *ao;
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
