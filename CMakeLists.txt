@@ -79,6 +79,8 @@ set(COMMON_SOURCES
         source/common/components/GameMovments.cpp
         source/common/components/Box_collider.hpp
         source/common/components/Box_collider.cpp
+        source/common/components/light.cpp
+        source/common/components/light.cpp
         
         source/common/components/movement.hpp
         source/common/components/movement.cpp

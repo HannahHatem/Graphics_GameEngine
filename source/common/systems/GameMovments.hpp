@@ -36,6 +36,7 @@ namespace our
 
         CameraComponent *camera = nullptr;
         GameMovments *controller = nullptr;
+        int planeScaleX = 0;
 
         void update(World *world, float deltaTime)
         {
@@ -46,6 +47,16 @@ namespace our
                 controller = entity->getComponent<GameMovments>();
                 if (controller)
                     break;
+            }
+            for (auto entity : world->getEntities())
+            {
+                // std::cout << std::endl
+                //           << "Name: " << entity->name << std::endl;
+                if (entity->name == "plane")
+                {
+                    planeScaleX = entity->localTransform.scale.x - 1;
+                    break;
+                }
             }
             // If there is no entity with both a CameraComponent and a FreeCameraControllerComponent, we can do nothing so we return
             if (!(controller))
@@ -101,7 +112,7 @@ namespace our
                 if (to_right)
                 {
                     position += right * (deltaTime * current_sensitivity.x);
-                    if (position.x >= 6)
+                    if (position.x >= planeScaleX)
                     {
                         to_right = false;
                     }
@@ -109,7 +120,7 @@ namespace our
                 else
                 {
                     position -= right * (deltaTime * current_sensitivity.x);
-                    if (position.x <= -6)
+                    if (position.x <= -planeScaleX)
                     {
                         to_right = true;
                     }
