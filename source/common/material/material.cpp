@@ -82,58 +82,58 @@ namespace our
     {
         TexturedMaterial::setup();
 
-        if(emission != nullptr)
+        if(albedo != nullptr)
         {
             // Select active texture unit
             glActiveTexture(GL_TEXTURE1);
             // bind el texture to the active texture unit
-            emission->bind();
+            albedo->bind();
             // Bind sampler to active texture unit
             sampler->bind(1);
-            shader->set("material.emission", 1);
+            shader->set("material.albedo", 1);
+        }
+
+        if (specular != nullptr)
+        {
+            // Select active texture unit
+            glActiveTexture(GL_TEXTURE2);
+            // bind el texture to the active texture unit
+            specular->bind();
+            // Bind sampler to active texture unit
+            sampler->bind(2);
+            shader->set("material.specular", 2);
         }
 
         if (roughness != nullptr)
         {
             // Select active texture unit
-            glActiveTexture(GL_TEXTURE2);
+            glActiveTexture(GL_TEXTURE3);
             // bind el texture to the active texture unit
             roughness->bind();
             // Bind sampler to active texture unit
-            sampler->bind(2);
-            shader->set("material.roughness", 2);
-        }
-
-        if (albedo != nullptr)
-        {
-            // Select active texture unit
-            glActiveTexture(GL_TEXTURE3);
-            // bind el texture to the active texture unit
-            albedo->bind();
-            // Bind sampler to active texture unit
             sampler->bind(3);
-            shader->set("material.albedo", 3);
+            shader->set("material.roughness", 3);
         }
 
-        if(specular != nullptr){
+        if(ao != nullptr){
             // Select active texture unit
             glActiveTexture(GL_TEXTURE4);
             // bind el texture to the active texture unit
-            specular->bind();
+            ao->bind();
             // Bind sampler to active texture unit
             sampler->bind(4);
-            shader->set("material.specular", 4);
+            shader->set("material.ambient_occlusion", 4);
         }
 
-        if(ao != nullptr)
+        if(emission != nullptr)
         {
             // Select active texture unit
             glActiveTexture(GL_TEXTURE5);
             // bind el texture to the active texture unit
-            ao->bind();
+            emission->bind();
             // Bind sampler to active texture unit
             sampler->bind(5);
-            shader->set("material.ambient_occlusion", 5);
+            shader->set("material.emission", 5);
         }
 
     }
