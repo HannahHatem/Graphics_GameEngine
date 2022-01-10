@@ -149,7 +149,57 @@ namespace our
                         std::string light_name = "lights[" + std::to_string(i) + "]";
                         if (lights[i]->getOwner()->parent)
                         {
-                            lightPos = lights[i]->getOwner()->parent->localTransform.position;
+                            lightPos = lights[i]->getOwner()->parent->localTransform.position + lights[i]->getOwner()->localTransform.position;
+                        }
+                        else
+                        {
+                            lightPos = lights[i]->getOwner()->localTransform.position;
+                        }
+                        
+                        
+                        
+                        switch (lights[i]->lightType)
+                        {
+                        case LightType::DIRECTIONAL:
+                            command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            break;
+                        case LightType::POINT:
+                        command.material->shader->set(light_name + ".direction", glm::normalize(command.center - lights[i]->getOwner()->localTransform.position));
+                            break;
+                        case LightType::SPOT:
+                            command.material->shader->set(light_name + ".direction", glm::normalize(lights[i]->direction));
+                            command.material->shader->set(light_name + ".cone_angles", lights[i]->cone_angles);
+                            break;
+                        }
+                        command.material->shader->set(light_name + ".position", lightPos);
+                        command.material->shader->set(light_name + ".color", lights[i]->color);
+                        command.material->shader->set(light_name + ".attenuation", lights[i]->attenuation);
+                        command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
+                    }
+                }
+                command.mesh->draw();
+                // printf("%d\n",(int)lights.size());
+            }
+            for (auto command : transparentCommands)
+            {
+                command.material->setup();
+                command.material->shader->set("transform", VP * command.localToWorld);
+                 if (dynamic_cast<LitMaterial *>(command.material))
+                {
+                    LitMaterial *litMaterial = dynamic_cast<LitMaterial *>(command.material);
+
+                    command.material->shader->set("VP", VP);
+                    command.material->shader->set("eye", eye);
+                    command.material->shader->set("M", command.localToWorld);
+                    command.material->shader->set("M_IT", glm::inverse(command.localToWorld));
+                    command.material->shader->set("light_count", (int)lights.size());
+                    for (int i = 0; i < lights.size(); i++)
+                    {
+                        glm::vec3 lightPos;
+                        std::string light_name = "lights[" + std::to_string(i) + "]";
+                        if (lights[i]->getOwner()->parent)
+                        {
+                            lightPos = lights[i]->getOwner()->parent->localTransform.position + lights[i]->getOwner()->localTransform.position;
                         }
                         else
                         {
@@ -176,13 +226,6 @@ namespace our
                         command.material->shader->set(light_name + ".type", (int)lights[i]->lightType);
                     }
                 }
-                command.mesh->draw();
-                // printf("%d\n",(int)lights.size());
-            }
-            for (auto command : transparentCommands)
-            {
-                command.material->setup();
-                command.material->shader->set("transform", VP * command.localToWorld);
                 command.mesh->draw();
             }
         };
