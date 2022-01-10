@@ -23,6 +23,8 @@ namespace our
         glm::vec3 initialPos;
         bool set;
         bool reset;
+        bool first;
+        int pinnescount;
 
     public:
         void enter(Application *app)
@@ -32,6 +34,8 @@ namespace our
             to_right = true;
             to_forward = false;
             set = false;
+            first = true;
+            pinnescount = 0;
         }
 
         CameraComponent *camera = nullptr;
@@ -40,7 +44,6 @@ namespace our
 
         void update(World *world, float deltaTime)
         {
-
             for (auto entity : world->getEntities())
             {
                 //camera = entity->getComponent<CameraComponent>();
@@ -48,16 +51,37 @@ namespace our
                 if (controller)
                     break;
             }
+
+             std::cout<<std::endl<<controller->downPinnes<<std::endl;
+
+            if(controller->tries == 2)
+            {
+                if(controller->downPinnes == pinnescount)
+                {
+                    std::cout<<std::endl<<"I am here \n";
+                    app->changeState("winnerWin");
+                }
+                else
+                    app->changeState("loserWin");
+
+            }
+
             for (auto entity : world->getEntities())
             {
+
+                if(first && entity->name == "pin")
+                    pinnescount++;
+
                 // std::cout << std::endl
                 //           << "Name: " << entity->name << std::endl;
                 if (entity->name == "plane")
                 {
                     planeScaleX = entity->localTransform.scale.x - 1;
-                    break;
                 }
             }
+
+            first = false;
+
             // If there is no entity with both a CameraComponent and a FreeCameraControllerComponent, we can do nothing so we return
             if (!(controller))
                 return;

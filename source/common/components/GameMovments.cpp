@@ -7,5 +7,6 @@ namespace our {
     void GameMovments::deserialize(const nlohmann::json& data){
         if(!data.is_object()) return;
         positionSensitivity = data.value("positionSensitivity", positionSensitivity);
+        pinnes_count = data.value("pinnes_count", pinnes_count);
     }
 }

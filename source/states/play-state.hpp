@@ -51,6 +51,7 @@ class Playstate: public our::State {
     }
 
     void onDestroy() override {
+        world.clear();
         // On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
         cameraController.exit();
         // and we delete all the loaded assets to free memory on the RAM and the VRAM

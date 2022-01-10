@@ -1,5 +1,6 @@
 {
     "start-scene": "main",
+    "score" : "none",
     "window":
     {
         "title":"Default Game Window",
@@ -9,6 +10,8 @@
         },
         "fullscreen": false
     },
+    "loserWin" : "loser",
+    "winnerWin" : "winner",
     "scene": {
         "assets":{
             "shaders":{
@@ -287,6 +290,7 @@
                 ]
             },
             {
+                "name" : "pin",
                 "position": [-0.8, -0.5, -11.3],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -312,6 +316,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [0.8, -0.5, -11.3],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -337,6 +342,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [-1.6, -0.5, -12.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -362,6 +368,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [0, -0.5, -12.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -387,6 +394,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [1.6, -0.5, -12.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -412,6 +420,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [-2.4, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -437,6 +446,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [-0.8, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -462,6 +472,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [0.8, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
@@ -487,6 +498,7 @@
             }
             ,
             {
+                "name" : "pin",
                 "position": [2.4, -0.5, -13.9],
                 "rotation": [-90, 0, 0],
                 "scale": [0.1, 0.1, 0.1],
