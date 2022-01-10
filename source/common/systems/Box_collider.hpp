@@ -52,15 +52,35 @@ namespace our
             for (int i = 0; i < colliders.size(); i++)
             {
                 Box_collider *first = colliders[i];
+                glm::vec3 first_pos = first->getOwner()->localTransform.position;
+                Entity *par = first->getOwner()->parent;
+                while (par)
+                {
+                    first_pos.x = par->localTransform.position.x + first_pos.x;
+                    first_pos.y = par->localTransform.position.y + first_pos.y;
+                    first_pos.z = par->localTransform.position.z + first_pos.z;
+                    par = par->parent;
+                }
                 for (int j = 0; j < colliders.size(); j++)
                 {
                     if (j == i)
                         continue;
                     Box_collider *second = colliders[j];
+
+                    glm::vec3 second_pos = second->getOwner()->localTransform.position;
+                    Entity *par = second->getOwner()->parent;
+                    while (par)
+                    {
+                        second_pos.x = par->localTransform.position.x + first_pos.x;
+                        second_pos.y = par->localTransform.position.y + first_pos.y;
+                        second_pos.z = par->localTransform.position.z + first_pos.z;
+                        par = par->parent;
+                    }
+
                     float disz, disy, disx;
-                    disy = first->getOwner()->localTransform.position.y - second->getOwner()->localTransform.position.y;
-                    disx = first->getOwner()->localTransform.position.x - second->getOwner()->localTransform.position.x;
-                    disz = first->getOwner()->localTransform.position.z - second->getOwner()->localTransform.position.z;
+                    disy = first_pos.y - second_pos.y;
+                    disx = first_pos.x - second_pos.x;
+                    disz = first_pos.z - second_pos.z;
 
                     if (disx < 0)
                         disx = disx * -1;
